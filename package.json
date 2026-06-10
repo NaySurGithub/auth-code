@@ -1,9 +1,8 @@
 {
   "name": "@nayonnpm/auth-code",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Ultimate production-ready authentication and authorization system for Node.js/Express. JWT, OAuth (30+), WebAuthn, MFA, RBAC, API Keys, HIBP, Captcha, and more.",
   "main": "src/index.js",
-  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NaySurGithub/auth-code.git"
