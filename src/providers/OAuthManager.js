@@ -20,7 +20,7 @@ const DEFAULT_PROVIDERS = {
         tokenUrl: 'https://discord.com/api/oauth2/token',
         userInfoUrl: 'https://discord.com/api/users/@me',
         defaultScope: 'identify email',
-        tokenFormat: 'form',
+        tokenFormat: 'json',
         userInfoHeaders: (token) => ({ Authorization: `Bearer ${token}` })
     },
     microsoft: {
