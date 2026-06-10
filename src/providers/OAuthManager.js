@@ -262,6 +262,14 @@ const DEFAULT_PROVIDERS = {
         defaultScope: 'name email',
         tokenFormat: 'form',
         userInfoHeaders: () => ({})
+    },
+    tiktok: {
+        authUrl: 'https://www.tiktok.com/v2/auth/authorize/',
+        tokenUrl: 'https://open.tiktokapis.com/v2/oauth/token/',
+        userInfoUrl: 'https://open.tiktokapis.com/v2/user/info/?fields=open_id,display_name,avatar_url',
+        defaultScope: 'user.info.basic',
+        tokenFormat: 'json',
+        userInfoHeaders: (token) => ({ Authorization: `Bearer ${token}` })
     }
 };
 
@@ -317,6 +325,9 @@ class OAuthManager {
         const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
         if (provider === 'twitch' && config.clientId) {
             headers['Client-Id'] = config.clientId;
+        }
+        if (provider === 'tiktok') {
+            headers['Client-Key'] = config.clientId;
         }
 
         const response = await fetch(config.tokenUrl, {
@@ -377,6 +388,13 @@ class OAuthManager {
         }
         if (provider === 'discord') {
             return { id: userInfo.id, email: userInfo.email, name: userInfo.global_name || userInfo.username };
+        }
+        if (provider === 'tiktok') {
+            return { 
+                id: userInfo.data.user.open_id, 
+                email: null, 
+                name: userInfo.data.user.display_name 
+            };
         }
 
         return { 
